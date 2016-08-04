@@ -1,0 +1,13 @@
+[to_kafka]
+type = "KafkaOutput"
+
+# common output settings
+message_matcher = "TRUE"
+encoder = "ProtobufEncoder"
+
+
+# specific settings
+{{ $nodes := getenv "KAFKA_SERVERS" }}
+addrs = [ "{{ replace $nodes "," "\",\"" -1 }}" ]
+partitioner = "RoundRobin"
+topic = "{{ getenv "KAFKA_TOPIC" }}"

@@ -1,0 +1,18 @@
+[DockerLogsInput]
+type = "DockerLogInput"
+endpoint = "unix:///var/run/docker.sock"
+decoder = "RegexDecoder"
+can_exit = false
+
+[DockerEventInput]
+type = "DockerEventInput"
+endpoint = "unix:///var/run/docker.sock"
+decoder = "RegexDecoder"
+can_exit = false
+
+[RegexDecoder]
+type = "PayloadRegexDecoder"
+match_regex = "(?P<message>.*)"
+
+    [RegexDecoder.message_fields]
+    message = "%message%"
